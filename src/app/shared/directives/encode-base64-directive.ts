@@ -12,7 +12,12 @@ export class EncodeBase64Directive {
 
   encodeFile() {
     const fileInput = this.element.nativeElement;
-    if (!fileInput.files?.length) return;
+    
+    if (!fileInput.files?.length) {
+      this.encoded.emit(''); 
+      return;
+    }
+
     const reader = new FileReader();
     reader.readAsDataURL(fileInput.files[0]);
     reader.addEventListener('loadend', () => {

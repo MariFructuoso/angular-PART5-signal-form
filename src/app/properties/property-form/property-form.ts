@@ -22,7 +22,7 @@ export class PropertyForm implements CanComponentDeactivate {
   saved = false;
   provinceId = signal('0');
 
-  newProperty = signal<PropertyInsert>({ //Modelo signal
+  newProperty = signal({ //Modelo signal
     title: '',
     description: '',
     price: 0,
@@ -73,6 +73,13 @@ townsResource = this.#provincesService.getTownsResource(computed(() => +this.pro
     });
   }
 
+  updateImage(image: string) {
+    this.newProperty.update((prop) => ({
+      ...prop,
+      mainPhoto: image
+    }));
+  }
+
   addProperty(event: Event) {
     event.preventDefault();
     
@@ -93,4 +100,5 @@ townsResource = this.#provincesService.getTownsResource(computed(() => +this.pro
     }
     return confirm('Do you want to leave the page? Changes will be lost.');
   }
+
 }
